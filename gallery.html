@@ -1,0 +1,524 @@
+<html>
+<head>
+<title>Gallery</title>
+<link rel="icon" type"image/jpg" href="https://s-media-cache-ak0.pinimg.com/236x/f2/b7/0b/f2b70bf1a21b7ab7a79724092e7a8549.jpg">
+<link rel="stylesheet" type="text/css" href="Tif.css">
+
+<script type="text/javascript" src="fancybox/lib/jquery-1.10.1.min.js"></script>
+
+	
+
+<!-- Add mousewheel plugin (this is optional) -->
+	
+<script type="text/javascript" src="fancybox/lib/jquery.mousewheel-3.0.6.pack.js"></script>
+
+
+
+<!-- Add fancyBox main JS and CSS files -->
+	
+<script type="text/javascript" src="fancybox/source/jquery.fancybox.js?v=2.1.5"></script>
+	
+
+<link rel="stylesheet" type="text/css" href="fancybox/source/jquery.fancybox.css?v=2.1.5" media="screen" />
+
+	
+
+<!-- Add Button helper (this is optional) -->
+	
+
+<link rel="stylesheet" type="text/css" href="fancybox/source/helpers/jquery.fancybox-buttons.css?v=1.0.5" />
+	
+
+<script type="text/javascript" src="../source/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+
+	
+
+<!-- Add Thumbnail helper (this is optional) -->
+	
+<link rel="stylesheet" type="text/css" href="fancybox/source/helpers/jquery.fancybox-thumbs.css?v=1.0.7" />
+	
+
+<script type="text/javascript" src="fancybox/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+
+	
+
+<!-- Add Media helper (this is optional) -->
+	
+<script type="text/javascript" src="fancybox/source/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+
+	
+<script type="text/javascript">
+		
+$(document).ready(function() {
+			
+/*
+			 *  Simple image gallery. Uses default settings
+			 */
+
+	$('.fancybox').fancybox();
+
+			
+/*
+			 *  Different effects
+			 */
+
+		
+// Change title type, overlay closing speed
+			
+$(".fancybox-effects-a").fancybox({
+				
+helpers: {
+					
+title : {
+				
+type : 'outside'
+					
+},
+					
+overlay : {
+						
+speedOut : 0
+					
+}
+				
+}
+			
+});
+
+			
+// Disable opening and closing animations, change title type
+			
+$(".fancybox-effects-b").fancybox({
+				
+openEffect  : 'none',
+				
+closeEffect	: 'none',
+
+				
+helpers : {
+					
+title : {
+						
+type : 'over'
+					
+}
+				
+}
+		
+});
+
+			
+// Set custom style, close if clicked, change title type and overlay color
+			$(".fancybox-effects-c").fancybox({
+				
+wrapCSS    : 'fancybox-custom',
+				
+closeClick : true,
+
+				
+openEffect : 'none',
+
+				
+helpers : {
+					
+title : {
+						
+type : 'inside'
+					
+},
+					
+overlay : {
+						
+css : {
+							
+'background' : 'rgba(238,238,238,0.85)'
+						}
+		}
+				
+}
+			
+});
+
+			
+// Remove padding, set opening and closing animations, close if clicked and disable overlay
+	$(".fancybox-effects-d").fancybox({
+				
+padding: 0,
+
+				
+openEffect : 'elastic',
+				
+openSpeed  : 150,
+
+				
+closeEffect : 'elastic',
+				
+closeSpeed  : 150,
+
+			
+closeClick : true,
+
+				
+helpers : {
+					
+overlay : null
+				
+}
+			
+});
+
+			
+/*
+			 *  Button helper. Disable animations, hide close button, change title type and content
+			 */
+
+			
+$('.fancybox-buttons').fancybox({
+				
+openEffect  : 'none',
+				
+closeEffect : 'none',
+
+				
+prevEffect : 'none',
+				
+nextEffect : 'none',
+
+				
+closeBtn  : false,
+
+				
+helpers : {
+					
+title : {
+					
+type : 'inside'
+					
+},
+					
+buttons	: {
+}
+				
+},
+
+				
+afterLoad : function() {
+					
+this.title = 'Image ' + (this.index + 1) + ' of ' + this.group.length + (this.title ? ' - ' + this.title : '');
+				
+}
+			
+});
+
+
+			
+/*
+			 *  Thumbnail helper. Disable animations, hide close button, arrows and slide to next gallery item if clicked
+			 */
+
+			
+$('.fancybox-thumbs').fancybox({
+				
+prevEffect : 'none',
+				
+nextEffect : 'none',
+
+				
+closeBtn  : false,
+				
+arrows    : false,
+				
+nextClick : true,
+
+				
+helpers : {
+					
+thumbs : 
+{
+					
+width  : 50,
+						
+height : 50
+					}
+				}
+		});
+
+			
+/*
+			 *  Media helper. Group items, disable animations, hide arrows, enable media and button helpers.
+			*/
+			
+$('.fancybox-media')
+				
+.attr('rel', 'media-gallery')
+				
+.fancybox({
+					
+openEffect : 'none',
+					
+closeEffect : 'none',
+					
+prevEffect : 'none',
+			
+nextEffect : 'none',
+
+					
+arrows : false,
+					
+helpers : {
+						
+media : {},
+				
+buttons : {}
+					
+}
+				
+});
+
+			
+/*
+			 *  Open manually
+			 */
+
+			$("#fancybox-manual-a").click(function() {
+				
+$.fancybox.open('1_b.jpg');
+			
+});
+
+			
+$("#fancybox-manual-b").click(function() {
+				
+$.fancybox.open({
+					
+href : 'iframe.html',
+					
+type : 'iframe',
+					
+padding : 5
+				
+});
+			
+});
+
+			
+$("#fancybox-manual-c").click(function() {
+				
+$.fancybox.open([
+					
+{
+						
+href : '1_b.jpg',
+						
+title : 'My title'
+		
+}, 
+{
+						
+href : '2_b.jpg',
+						
+title : '2nd title'
+					
+}, 
+{
+					
+href : '3_b.jpg'
+					
+}
+				
+],
+{
+					
+helpers : {
+						
+thumbs : {
+							
+width: 75,
+							
+height: 50
+						}
+					}
+				
+});
+			
+});
+
+
+		
+});
+	
+</script>
+	
+<style type="text/css">
+		
+.fancybox-custom .fancybox-skin {
+			
+box-shadow: 0 0 50px #222;
+		}
+
+
+</style>
+</head>
+
+<body>
+
+<div id="top">
+
+<div id="header">Cakes By TIF</div>
+
+<div id="subheader">
+
+<div id="navigation">
+
+<ul id="drop-nav">
+
+<li><a href="default.html" style="border-top-left-radius: 15px; border-top-right-radius: 15px;border-bottom-left-radius: 15px; border-bottom-right-radius: 15px">Home</a></li>
+
+<li><a href="products.html" style="border-top-left-radius: 15px; border-top-right-radius: 15px">Products</a>
+
+	<ul>
+
+		<li><a href="cakes.html" style="font-size: 12.27pt">Cakes</a></li>
+
+		<li><a href="cookies.html" style="font-size: 12.27pt">Cookies</a></li>
+
+		<li><a href="cupcakes.html" style="font-size: 12.27pt">Cupcakes</a></li>
+
+		<li><a href="cakeballs.html" style="font-size: 12.27pt">CakeBalls</a></li>
+
+		<li><a href="other.html" style="font-size: 12.27pt;border-bottom-left-radius: 15px; border-bottom-right-radius: 15px">Specialty</a></li>
+
+	</ul>
+</li>
+
+<li><a href="gallery.html" style="border-top-left-radius: 15px; border-top-right-radius: 15px;border-bottom-left-radius: 15px; border-bottom-right-radius: 15px">Gallery</a></li>
+
+<li><a href="quote.html" style="border-top-left-radius: 15px; border-top-right-radius: 15px;border-bottom-left-radius: 15px; border-bottom-right-radius: 15px">Quote</a></li>
+
+<li><a href="contact.html" style="border-top-left-radius: 15px; border-top-right-radius: 15px;border-bottom-left-radius: 15px; border-bottom-right-radius: 15px">About Us</a></li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+<div id="content" style="height: 3213.28px">
+
+<div id="article">
+
+<div class="gallery">
+<a class="fancybox" data-fancybox-group="gallery" title="Rainbow Birthday Cake" href="Pictures/Cakes/img1.jpg"><img src="Pictures/Cakes/img1 tile.jpg" width="350px" height="350px" alt="" /></a>
+</div>
+
+<div class="gallery">
+<a class="fancybox" data-fancybox-group="gallery"  title="North Carolina Tar Heels' Cookie Cake." href="Pictures/Cakes/img2.jpg"><img src="Pictures/Cakes/img2 tile.jpg" width="350px" height="350px" /></a>
+</div>
+
+<div class="gallery">
+<a class="fancybox" data-fancybox-group="gallery" title="Two Tiered Musical Birthday Cake." href="Pictures/Cakes/img3.jpg"><img src="Pictures/Cakes/img3 tile.jpg" width="350px" height="350px" /></a>
+</div>
+
+<div class="gallery">
+<a class="fancybox" data-fancybox-group="gallery" title="Simple Gold And Pink, Three Tiered Birthday Cake." href="Pictures/Cakes/img4.jpg"><img src="Pictures/Cakes/img4 tile.jpg" width="350px" height="350px" ></a>
+</div>
+
+<div class="gallery">
+<a class="fancybox" data-fancybox-group="gallery" title="Teenage Mutant Ninja Turtle Birthday Cake." href="Pictures/Cakes/img5.jpg"><img src="Pictures/Cakes/img5 tile.jpg" width="350px" height="350px" /></a>
+</div>
+
+<div class="gallery">
+<a class="fancybox" data-fancybox-group="gallery" title="Sons of Anarchy Birthday Cake." href="Pictures/Cakes/img6.jpg"><img src="Pictures/Cakes/img6 tile.jpg" width="350px" height="350px" /></a>
+</div>
+
+<div class="gallery">
+<a class="fancybox" data-fancybox-group="gallery" title="A Large Catfish Cake." href="Pictures/Cakes/img7.jpg"><img src="Pictures/Cakes/img7 tile.jpg" width="350px" height="350px" /></a>
+</div>
+
+<div class="gallery">
+<a class="fancybox" data-fancybox-group="gallery" title="A Spooky Pumpkin Cake." href="Pictures/Cakes/img8.jpg"><img src="Pictures/Cakes/img8 tile.jpg" width="350px" height="350px" /></a>
+</div>
+
+<div class="gallery">
+<a class="fancybox" data-fancybox-group="gallery" title="Dolphin Birthday Cake." href="Pictures/Cakes/img9.jpg"><img src="Pictures/Cakes/img9 tile.jpg" width="350px" height="350px"  /></a>
+</div>
+
+<div class="gallery">
+<a class="fancybox" data-fancybox-group="gallery" title="A Miller Lite Birthday Cake." href="Pictures/Cakes/img10.jpg"><img src="Pictures/Cakes/img10 tile.jpg" width="350px" height="350px" /></a>
+</div>
+
+<div class="gallery">
+<a class="fancybox" data-fancybox-group="gallery" title="A Simple, Five Tiered Wedding Cake." href="Pictures/Cakes/img11.jpg"><img src="Pictures/Cakes/img11 tile.jpg" width="350px" height="350px"/></a>
+</div>
+
+<div class="gallery">
+<a class="fancybox" data-fancybox-group="gallery" title="U.S. Marine Cake." href="Pictures/Cakes/img12.jpg"><img src="Pictures/Cakes/img12 tile.jpg" width="350px" height="350px"/></a>
+</div>
+
+<div class="gallery">
+<a class="fancybox" data-fancybox-group="gallery" title="Peanutbutter Cupcakes." href="Pictures/Cupcakes/img13.jpg"><img src="Pictures/Cupcakes/img13 tile.jpg" width="350px" 
+height="350px"/></a>
+</div>
+
+<div class="gallery">
+<a class="fancybox" data-fancybox-group="gallery" title="Winter Wonderland Cake Pops." href="Pictures/Other/img14.jpg"><img src="Pictures/Other/img14 tile.jpg" width="350px" height="350px"/></a>
+</div>
+
+<div class="gallery">
+<a class="fancybox" data-fancybox-group="gallery" title="Lucky St. Patrick's Day Cake Pops." href="Pictures/Other/img15.jpg"><img src="Pictures/Other/img15 tile.jpg" width="350px" height="350px" /></a>
+</div>
+
+<div class="gallery">
+<a class="fancybox" data-fancybox-group="gallery" title="Colorful, Neon Cake Pops." href="Pictures/Other/img16.jpg"><img src="Pictures/Other/img16 tile.jpg" width="350px" height="350px" /></a>
+</div>
+
+</div>
+
+</div>
+
+<div id="footer">
+<div id="footer-content">
+
+<div id="footer-content1">
+<center>
+<table id="footer-table">
+<tr><td>Hours:</td></tr>
+<tr><td>Sunday: 9 A.M.-9 P.M.</td></tr>
+<tr><td>Monday-Friday: 9 A.M.-9 P.M.</td></tr>
+<tr><td>Saturday: 9 A.M.-9 P.M.</td></tr>
+</table>
+</center>
+</div>
+
+<div id="footer-content2">
+<center>
+<table id="footer-table">
+<tr><td>Contact Us:</td></tr>
+<tr><td>937-641-9903</td></tr>
+<tr><td>cakesbytif@gmail.com</td></tr>
+<tr><td><a href="https://www.facebook.com/cakesbytif" id="footer-a">facebook.com/cakesbytif</a></td></tr>
+<tr><td><a href="https://www.facebook.com/cakesbytif" id="footer-a"><img alt="" style="width:36px;height:36px;object-fit:cover;" src="https://static.wixstatic.com/media/8d2c2a4846503b9067e2fd2f590445c2.wix_mp/v1/fill/w_36,h_36,al_c,usm_0.50_1.20_0.00/8d2c2a4846503b9067e2fd2f590445c2.wix_mp"></a></td></tr>
+</table>
+</center>
+</div>
+
+<div id="footer-content3">
+<center>
+<table id="footer-table">
+<tr><td>Products:</td></tr>
+<tr><td><a href="cakes.html" id="footer-a">Cakes</a></td></tr>
+<tr><td><a href="cookies.html" id="footer-a">Cookies</a></td></tr>
+<tr><td><a href="cupcakes.html" id="footer-a">Cupcakes</a></td></tr>
+<tr><td><a href="other.html" id="footer-a">Other</a></td></tr>
+</table>
+</center>
+</div>
+
+</div>
+</div>
+
+
+</body>
+</html>
